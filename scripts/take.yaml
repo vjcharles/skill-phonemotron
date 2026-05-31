@@ -1,0 +1,18 @@
+# PHONEMOTRON canonical take: apply the sound, play the score, capture WAV.
+# eval: paths are bare filenames -> resolve next to this recipe (the working copy).
+# Run from the working dir:  browser-runner run take.yaml --out ./phonemotron-session/
+url: https://cantonbecker.com/phonemotron/
+headless: true
+ready: "!!document.querySelector('#rec-toggle')"
+steps:
+  - eval: preset.js
+  - eval: perform.js
+    capture_download: "*.wav"
+    # Prefix with the preset `label` so the file names its patch. Rename this to
+    # match when you change the label, e.g. label 'canton' -> canton-take-{n}.wav.
+    capture_download_to: session-take-{n}.wav
+  # Emit the app-native preset (the share artifact) via the app's own Save, which
+  # downloads phonemotron-<name>.txt unescaped. Rename to match the label.
+  - eval: export-preset.js
+    capture_download: "*.txt"
+    capture_download_to: session.preset.txt

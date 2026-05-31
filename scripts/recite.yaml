@@ -1,0 +1,11 @@
+# PHONEMOTRON streaming mode (text use): translate + perform a passage, capture WAV.
+# eval: path is a bare filename -> resolves next to this recipe (the working copy).
+# Run from the working dir:  browser-runner run recite.yaml --out ./phonemotron-session/
+url: https://cantonbecker.com/phonemotron/
+headless: true
+ready: "!!document.querySelector('#rec-toggle')"
+steps:
+  - eval: recite.js
+    capture_download: "*.wav"
+    # Prefix with the preset `label` to name the patch, e.g. canton-recite-{n}.wav.
+    capture_download_to: session-recite-{n}.wav

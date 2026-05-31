@@ -65,7 +65,7 @@
   // --- 1. translate pass (recorder OFF). Uses the app's own translate.php. -
   // FAIL FAST on refusal: a rate-limited line never changes #seq, so without
   // this the loop burns ~7s per line and then performs raw English (silent or
-  // garbled). The server caps at ~100 translations/hr; see reference.md.
+  // garbled). The server caps at ~100 translations/hr; see references/sequencer-language.md.
   const lines = [];
   for (const line of SCRIPT) {
     lastTranslate = null;

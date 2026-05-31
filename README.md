@@ -2,7 +2,7 @@
 
 An agent skill for **Phonemotron**, a browser-based retro formant vocal synthesizer at <https://cantonbecker.com/phonemotron/>.
 
-You give it ARPABET phonemes (or English, auto-translated) and play notes; it sings the phonemes at the pitches you play, shaped by autochord, arpeggiator, delay, and an LFO. A robot choir that sings your words. Pure Web Audio (no Tone.js), built on the klattsch Klatt speech synth.
+You give it ARPABET phonemes (or English, auto-translated) and play notes; it sings the phonemes at the pitches you play, shaped by autochord, arpeggiator, delay, and an LFO. A robot choir that sings your words. Pure Web Audio, built on the klattsch Klatt speech synth.
 
 > **Pairs with [`skill-browser-runner`](https://github.com/vjcharles/skill-browser-runner)** for AI-driven mode (the agent operates the synth headlessly). Learning mode works on its own.
 
@@ -53,7 +53,7 @@ The agent opens the page headlessly, applies a preset, plays a timed score, reco
 - **Narrate the instrument** to a human at the GUI (learning mode).
 - **Operate the instrument headlessly** via the `browser-runner` primitive this skill depends on (AI-driven mode): render a **take**, **stream** affect-tagged text as a continuous voice, and bundle a take to **share**.
 
-The full skill lives in [`SKILL.md`](SKILL.md). The instrument's sequencer language (phoneme bank, pauses, stress, inline pitch and directives) is captured as a dated snapshot in [`reference.md`](reference.md). Helper scripts and the canonical recipes are in [`scripts/`](scripts/).
+The full skill lives in [`SKILL.md`](SKILL.md). The instrument's sequencer language (phoneme bank, pauses, stress, inline pitch and directives) is captured as a dated snapshot in [`references/sequencer-language.md`](references/sequencer-language.md). Helper scripts and the canonical recipes are in [`scripts/`](scripts/).
 
 ## Attribution
 

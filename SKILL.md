@@ -190,7 +190,7 @@ harmonic colour) — pitch is flat *within* a line; affect varies *between* line
 **Pauses are an expressive knob, not just spacing.** Silence inside and between words is part
 of the affect: a beat before a heavy word lands it. Write pauses into the `text` itself —
 `,`/`;`/`.` for fixed 100/200/300 ms, `_` for a rate-scaled gap inside a word, `( … )` to
-compress a syllable. See `reference.md`. (Listener feedback: syllable-level pauses on a
+compress a syllable. See `references/sequencer-language.md`. (Listener feedback: syllable-level pauses on a
 negative word read as a distinct sonic effect alongside tone, pitch, and chord.)
 
 ##### Other streaming uses
@@ -199,7 +199,7 @@ Logged for future sessions. Each extends the same shape (prepare → one live se
 continuous recording); they differ in what maps to pitch and timing:
 
 - **Singing.** Beyond spoken-with-tone: give a phrase a melodic contour. Two paths (see
-  [`reference.md`](reference.md)): the **light** path writes pitch into the `text` itself with
+  [`references/sequencer-language.md`](references/sequencer-language.md)): the **light** path writes pitch into the `text` itself with
   per-phoneme deltas (`AH+2` sticky, `AH(+2)` transient, `b=C4` to set base by note) so a melody
   lives inside one held note; the **chunked** path splits a line into word-level phoneme chunks
   and triggers one note per chunk at a chosen pitch. Lyrics + a melody → a sung phrase.
@@ -233,7 +233,7 @@ keep a take from coming out silent or broken.
   those (`#rec-toggle`, Import/Export) from your working copies.
 - **The `text` field is a mini-language, not just ARPABET.** Pauses (`,` `;` `.`), stress
   (`AH'`), per-phoneme pitch (`AH+2` sticky, `AH(+2)` transient), inline directives (`r`ate,
-  `b`ase, `v`ibrato…), syllable groups `( … )`, comments. **Read [`reference.md`](reference.md)
+  `b`ase, `v`ibrato…), syllable groups `( … )`, comments. **Read [`references/sequencer-language.md`](references/sequencer-language.md)
   before composing a sequencer string** — it is the snapshot grammar + the 39-code phoneme bank.
   Unknown tokens are silently skipped (a common cause of a too-quiet or silent take).
 - **Preset value is a loose JS object literal, not JSON** (single quotes, trailing commas,
@@ -252,7 +252,7 @@ keep a take from coming out silent or broken.
 | "make it a chord / sadder / faster" | Edit `controls` in `preset.js` (`chord-type`, `global-bpm`, `lfo1-*`, `base-dur`). Re-run. |
 | "change the rhythm / hold notes longer" | Edit the `SCORE` in `perform.js` (note on/off ms, which keys). Re-run. |
 | "recite this / say this with feeling" | Streaming mode: put the text in `recite.js` `SCRIPT`, **infer each line's affect from its meaning**, run `recite.yaml`. |
-| "make it sing / give it a melody" | Light path: write pitch into `text` with per-phoneme deltas (`AH+2`, `b=C4`) — see [`reference.md`](reference.md). Or chunked: one note per word-chunk at a chosen pitch. |
+| "make it sing / give it a melody" | Light path: write pitch into `text` with per-phoneme deltas (`AH+2`, `b=C4`) — see [`references/sequencer-language.md`](references/sequencer-language.md). Or chunked: one note per word-chunk at a chosen pitch. |
 | "score our conversation / ambient voice" | Streaming → conversational sonification / ambient texture: stream short utterances whose harmony tracks the mood. |
 | "share this / send it to someone" | Run `share.sh <workdir> <label>`: WAV + app-native `.preset.txt` + 3-line README, zipped, Gmail-safe. Automation stays behind. |
 | "walk me through it" | Learning mode: read *Modes → learning* (the flat list) to the human. |
@@ -294,7 +294,7 @@ needed; prefer applying a preset object.
 | Apply a preset (the dial) | `#import-preset` → set `#import-textarea`.value → `#import-load-btn` | Value is a loose JS object literal, **not** JSON. Verified to set every control. |
 | Read/save current patch | `#export-preset` → `#export-textarea` | The shareable recipe. `#export-copy-btn` / `#export-save-btn`. |
 | **Play a note** | `window.postMessage({type:'keydown', key:'k'}, '*')` / `{type:'keyup', …}` | Built-in note-injection hook (typing.js). Keys: see map below. |
-| Phonemes | `#seq` (textarea) | ARPABET **+ sequencer DSL** (pauses, stress, pitch, directives) — see [`reference.md`](reference.md). `#translate-btn` converts English→ARPABET. |
+| Phonemes | `#seq` (textarea) | ARPABET **+ sequencer DSL** (pauses, stress, pitch, directives) — see [`references/sequencer-language.md`](references/sequencer-language.md). `#translate-btn` converts English→ARPABET. |
 | Loop | `#loop-on` | Held note repeats the phrase ~100×. |
 | Speed | `#base-dur` (select), `button.speed-cell`, `button.speed-step` | Phoneme articulation rate. |
 | Autochord | `#chord-on`, `#chord-type` | Internal values e.g. `min11`, `maj9`, `sus2`, `quartal`, `min6`, `dom9`, `maj7s11`, `add9`, `six9`, `min9`. |
@@ -311,7 +311,7 @@ black `w`49 `e`51 `t`54 `y`56 `u`58 `o`61 `p`63 · wheels `-`/`=` bend, `[`/`]` 
 
 ## Files in this skill
 
-- **`reference.md`** — the instrument's language: sequencer DSL grammar + the 39-code phoneme
+- **`references/sequencer-language.md`** — the instrument's language: sequencer DSL grammar + the 39-code phoneme
   bank, a dated snapshot of the app source. Read it before composing a `text` string.
 
 ### Scripts
@@ -363,7 +363,7 @@ to `tmp/` — keep a take's artifacts beside each other in pwd.
   at up to ~7s) overruns it and captures **no WAV**. For long passages, render in **chunks**
   (each under the cap) and concatenate: `ffmpeg -i a.wav -i b.wav -filter_complex
   '[0:a][1:a]concat=n=2:v=0:a=1' out.wav`. Chunking is also resumable (WAVs are big and
-  uncompressed). Translation is the real ceiling — see `reference.md` `translate.php` (~100/hr).
+  uncompressed). Translation is the real ceiling — see `references/sequencer-language.md` `translate.php` (~100/hr).
 - **Verify the take's loudness *over time*, not just peak.** A render that rate-limits or fails
   partway is silent after the first lines but still reports a full global peak (early lines had
   signal) and full duration (silent lines still consume their hold+gap). So a peak-or-duration
@@ -388,14 +388,14 @@ App source is **readable ES modules** under `src/`:
 ```
 src/midi.js              ← main: controls, voices, triggerNote, recorder wiring
 src/typing.js            ← musical typing + the postMessage note hook
-src/engine/sequencer.js  ← compileString + tokenize (the text DSL; snapshot in reference.md)
+src/engine/sequencer.js  ← compileString + tokenize (the text DSL; snapshot in references/sequencer-language.md)
 src/engine/phonemes.js   ← PHONEME_KEYS (re-exports the default bank)
 src/engine/banks/        ← phoneme banks (bundled.js; default klatt1980-en)
 src/presets.js           ← PRESETS, chord/LFO internal value maps
 src/recorder.js          ← WAV capture from mainGain
 ```
 
-`reference.md` is the distilled, dated snapshot of the DSL + bank, so a session does not have
+`references/sequencer-language.md` is the distilled, dated snapshot of the DSL + bank, so a session does not have
 to re-read these. Re-derive it from source if the app version moves substantially.
 
 - The **postMessage note hook** (typing.js, the `window 'message'` listener) is the
